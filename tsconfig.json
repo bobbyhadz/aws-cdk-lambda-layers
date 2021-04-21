@@ -26,7 +26,12 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "typeRoots": ["./node_modules/@types"],
-    "isolatedModules": true
+    "isolatedModules": true,
+    "baseUrl": "./",
+    "paths": {
+      "/opt/nodejs/yup-utils": ["src/layers/yup-utils/nodejs/yup-utils"],
+      "/opt/nodejs/calc": ["src/layers/calc/nodejs/calc"]
+    }
   },
   "exclude": ["node_modules", "**/node_modules/*", "cdk.out"]
 }

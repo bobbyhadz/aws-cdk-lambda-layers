@@ -10,7 +10,7 @@ A repository for an article on
 2. Install the dependencies
 
 ```bash
-npm install
+npm install && npm install --prefix src/layers/yup-utils/nodejs
 ```
 
 3. Create the CDK stack
