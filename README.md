@@ -12,6 +12,7 @@ A repository for an article on
 2. Install the dependencies
 
 ```bash
+cd aws-cdk-lambda-layers
 npm install && npm install --prefix src/layers/yup-utils/nodejs
 ```
 
