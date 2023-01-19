@@ -2,14 +2,13 @@ import {Construct} from "constructs";
 import {aws_ec2} from "aws-cdk-lib";
 import {IpAddresses, SubnetType} from "aws-cdk-lib/aws-ec2";
 
-const vpcName = 'PrismaVpc';
+const vpcName = 'PostgresPrismaVpc';
 
 export class Network extends Construct {
     public readonly vpc: aws_ec2.IVpc
 
     constructor(scope: Construct, id: string) {
         super(scope, id);
-
 
         this.vpc = new aws_ec2.Vpc(this, id, {
             vpcName: vpcName,

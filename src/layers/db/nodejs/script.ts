@@ -26,12 +26,12 @@ async function main() {
     const createUserWithPosts = async () => {
         const user = await prisma.user.create({
             data: {
-                name: 'Amy L',
-                email: 'amy@email.com',
+                name: 'John A',
+                email: 'john@email.com',
                 post: {
                     create: {
-                        title: 'Lasagna Recipe',
-                        content: 'This is my first recipe'
+                        title: 'Mud Bike',
+                        content: 'This is my first ride in the Alps!'
                     }
                 }
             }
@@ -41,7 +41,7 @@ async function main() {
 
     // await insertUser()
      await getAllUsers()
-    //await createUserWithPosts()
+    // await createUserWithPosts()
     // await createUser("Amy B", "amy@email.com")
     // await getAllUsers();
 }

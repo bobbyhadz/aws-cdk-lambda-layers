@@ -9,14 +9,14 @@ interface FunctionsProps {
     layers: LayerVersion[]
 }
 
-export class Functions extends Construct {
+export class Lambdas extends Construct {
     constructor(scope: Construct, id: string, props: FunctionsProps) {
         super(scope, id);
 
-        const functionsDir = path.join(__dirname, "functions")
+        const lambdasDir = path.join(__dirname, '../', 'lambdas')
 
         const getAllUsersFn = new aws_lambda_nodejs.NodejsFunction(this, 'GetAllUsersFn', {
-            entry: path.join(functionsDir, "get-users.ts"),
+            entry: path.join(lambdasDir, "users", "read", "get-all-users.ts"),
             runtime: Runtime.NODEJS_18_X,
             architecture: Architecture.ARM_64,
             timeout: Duration.minutes(10),
