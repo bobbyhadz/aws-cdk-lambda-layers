@@ -1,31 +1,19 @@
-# How to use Lambda Layers in AWS CDK - Complete Guide
-
-A repository for an article on
-[bobbyhadz.com](https://bobbyhadz.com/blog/aws-cdk-lambda-layers)
-
-> If you use CDK v1, switch to the cdk-v1 branch
+# Prisma IO as a DB layer in AWS CDK
 
 ## How to Use
 
-1. Clone the repository
-
-2. Install the dependencies
-
+- Clone the repository
+- Install the dependencies
 ```bash
 cd aws-cdk-lambda-layers
-npm install && npm install --prefix src/layers/yup-utils/nodejs
+npm install && npm install --prefix src/layers/db/nodejs
 ```
-
-3. Create the CDK stack
-
+- Create the CDK stack
 ```bash
-npx aws-cdk deploy
+cdk deploy
 ```
-
-4. Open the AWS Console and the stack should be created in your default region
-
-5. Cleanup
-
+- Open the AWS Console and the stack should be created in your default region
+- Cleanup
 ```bash
-npx aws-cdk destroy
+cdk destroy
 ```
