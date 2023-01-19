@@ -15,11 +15,11 @@ export async function main(
 ): Promise<APIGatewayProxyResultV2> {
   console.log(event);
 
-  await schema.isValid({name: 'Tom', age: 24});
+  const isValidSchema = await schema.isValid(event);
 
   return {
     // 👇 using calc layer
-    body: JSON.stringify({num: double(15)}),
+    body: JSON.stringify({num: double(15), isValidSchema}),
     statusCode: 200,
   };
 }
