@@ -30,7 +30,8 @@
     "baseUrl": "./",
     "paths": {
       "/opt/nodejs/yup-utils": ["src/layers/yup-utils/nodejs/yup-utils"],
-      "/opt/nodejs/calc": ["src/layers/calc/nodejs/calc"]
+      "/opt/nodejs/calc": ["src/layers/calc/nodejs/calc"],
+      "/opt/nodejs/db": ["src/layers/db/nodejs/db"]
     }
   },
   "exclude": ["node_modules", "**/node_modules/*", "cdk.out"]
