@@ -9,7 +9,6 @@ export const handler = async function main(
     console.log(DATABASE_URL);
     const allUsers = await getAllUsers()
     return {
-        // 👇 using calc layer
         body: JSON.stringify(allUsers),
         statusCode: 200,
     };

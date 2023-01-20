@@ -17,3 +17,12 @@ cdk deploy
 ```bash
 cdk destroy
 ```
+
+## Testing Layer
+This is where the business logic is written
+and tested without CDK
+
+## Testing Lambdas Locally
+This is where business logic is tested when 
+wrapped in AWS Lambda functions. However, the testing is done
+on local machine without deploying to AWS 

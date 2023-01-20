@@ -1,7 +1,7 @@
 import {Code, LayerVersion} from 'aws-cdk-lib/aws-lambda';
 import * as cdk from 'aws-cdk-lib';
 import {Network} from "./constructs/network";
-import {Lambdas} from "./constructs/lambdas";
+import {Functions} from "./constructs/functions";
 import {Database} from "./constructs/database";
 
 export class Stack extends cdk.Stack {
@@ -19,6 +19,6 @@ export class Stack extends cdk.Stack {
             vpc: network.vpc,
             dbUser: "postgres"
         })
-        const lambdas = new Lambdas(this, "PostgresPrismaLambdas", {db: dbInstance.db, layers: [dbLayer]})
+        const lambdas = new Functions(this, "PostgresPrismaLambdas", {db: dbInstance.db, layers: [dbLayer]})
     }
 }
