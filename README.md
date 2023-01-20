@@ -85,9 +85,28 @@ With that you can invoke the function as defined below
 
 **Get All Users**
 ```shell
-cdk synth && sam local invoke -t cdk.out/PostgresPrismaStack.template.json GetAllUsersFn --env-vars env.json
+sam local invoke -t cdk.out/PostgresPrismaStack.template.json GetAllUsersFn --env-vars env.json
 ```
-If this suceeds, you should see an output similar to the following
+If this succeeds, you should see an output similar to the following
 ```shell
 {"body":"[{\"id\":1,\"email\":\"amy@email.com\",\"name\":\"Amy L\",\"post\":[{\"id\":1,\"title\":\"Lasagna Recipe\",\"content\":\"This is my first recipe\",\"published\":false,\"authorId\":1}]},{\"id\":2,\"email\":\"john@email.com\",\"name\":\"John A\",\"post\":[{\"id\":2,\"title\":\"Mud Bike\",\"content\":\"This is my first ride in the Alps!\",\"published\":false,\"authorId\":2}]},{\"id\":3,\"email\":\"johnny@email.com\",\"name\":\"Johnny Smith\",\"post\":[]},{\"id\":4,\"email\":\"jacinda@ardern.govt.nz\",\"name\":\"Jacinda Ardern\",\"post\":[]}]","statusCode":200}
 ```
+**Create User**
+Since this functions, takes input, we need to create an event file to provide events.
+- Copy event file
+```shell
+cp events.json.sample event.json
+```
+- Update event data as per your needs in `events.json`.
+- Invoke function
+```shell
+sam local invoke -t cdk.out/PostgresPrismaStack.template.json CreateUserFn --env-vars env.json -e events.json
+```
+If this succeeds, you should see an output similar to the following
+```shell
+{"body":"{\"id\":5,\"email\":\"remy@email.com\",\"name\":\"Remy D\"}","statusCode":200}
+```
+
+
+## Resources
+[Invoking Lambda Functions Locally](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html)

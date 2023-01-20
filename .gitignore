@@ -89,4 +89,5 @@ cdk-exports-dev.json
 env.js
 env.ts
 .idea
-.env.json
+env.json
+events.json
