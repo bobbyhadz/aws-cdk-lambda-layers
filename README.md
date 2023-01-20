@@ -1,7 +1,6 @@
 # Prisma IO as a DB layer in AWS CDK
 
-## How to Use
-
+## How to run
 - Clone the repository
 - Install the dependencies
 ```bash
@@ -21,6 +20,7 @@ cdk destroy
 ## Testing Layer
 This is where the business logic is written
 and tested without CDK
+> Note: Details to be added soon
 
 ## Testing Lambdas Locally
 This is where business logic is tested when wrapped in AWS Lambda functions. However, the testing is done
@@ -91,7 +91,7 @@ If this succeeds, you should see an output similar to the following
 ```shell
 {"body":"[{\"id\":1,\"email\":\"amy@email.com\",\"name\":\"Amy L\",\"post\":[{\"id\":1,\"title\":\"Lasagna Recipe\",\"content\":\"This is my first recipe\",\"published\":false,\"authorId\":1}]},{\"id\":2,\"email\":\"john@email.com\",\"name\":\"John A\",\"post\":[{\"id\":2,\"title\":\"Mud Bike\",\"content\":\"This is my first ride in the Alps!\",\"published\":false,\"authorId\":2}]},{\"id\":3,\"email\":\"johnny@email.com\",\"name\":\"Johnny Smith\",\"post\":[]},{\"id\":4,\"email\":\"jacinda@ardern.govt.nz\",\"name\":\"Jacinda Ardern\",\"post\":[]}]","statusCode":200}
 ```
-**Create User**
+**Create User**  
 Since this functions, takes input, we need to create an event file to provide events.
 - Copy event file
 ```shell
