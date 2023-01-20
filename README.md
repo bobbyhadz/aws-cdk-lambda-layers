@@ -17,10 +17,90 @@ cdk deploy
 cdk destroy
 ```
 
-## Testing Layer
-This is where the business logic is written
-and tested without CDK
-> Note: Details to be added soon
+## How to run migrations and database setup
+> Note: To be added soon
+
+# Testing
+## Testing Layer (DB and business logic)
+This is where the business logic is written and tested without CDK. This is the **fastest** way to test your business logic
+against the DB in AWS.
+
+### Pre-requisites
+- You must have deployed the application on AWS.
+- You must have access to AWS console.
+- Locate DB credentials
+  - Navigate to Cloudformation stack that contains this deployed app.
+  - Click on Resources. Here you will see list of resource including `Database`. Click on it.
+  - Then click on **Database** > **Secret**.
+  - Here you will find a Secret that starts with name `PostgresPrismaStackDatabaseSecret`. Next to it is a link. Click on it.
+  - It takes you the new tab which is the Secret associted with this database.
+  - As you scroll, you should see a button called *Retrieve secret value*. Click on that.
+  - Here you will find the credentials needed to connect to your database from your local. Keep a note of these values
+
+### Steps
+- Navigate to code where `prisma` directory exists
+```shell
+cd src/layers/db/nodejs/prisma
+```
+- Create `.env` file
+```shell
+cp .env.sample .env
+```
+Copy all the necessary credentials information in `.env` from the Secret Manager page on AWS console.
+> Note: The `.env` file is in `.gitignore` so it will not be checked in by default.
+
+- Locate to directory that contains `script.ts`
+```shell
+cd src/layers/db/nodejs
+```
+In this file,
+- You can import the functions that use as entry point to lambda functions.
+- The imported function should be used inside the `main()` method. For example, by default, `getAllUsers()` is imported.
+- Now that you have `.env` with the credentials and the function ready to execute, run the function
+```shell
+npx ts-node script.ts
+```
+If call succeeds, you should see an output similar to the following
+```shell
+[
+  {
+    id: 1,
+    email: 'amy@email.com',
+    name: 'Amy L',
+    post: [
+      {
+        id: 1,
+        title: 'Lasagna Recipe',
+        content: 'This is my first recipe',
+        published: false,
+        authorId: 1
+      }
+    ]
+  },
+  {
+    id: 2,
+    email: 'john@email.com',
+    name: 'John A',
+    post: [
+      {
+        id: 2,
+        title: 'Mud Bike',
+        content: 'This is my first ride in the Alps!',
+        published: false,
+        authorId: 2
+      }
+    ]
+  },
+  { id: 3, email: 'johnny@email.com', name: 'Johnny Smith', post: [] },
+  {
+    id: 4,
+    email: 'jacinda@ardern.govt.nz',
+    name: 'Jacinda Ardern',
+    post: []
+  },
+  { id: 5, email: 'remy@email.com', name: 'Remy D', post: [] }
+]
+```
 
 ## Testing Lambdas Locally
 This is where business logic is tested when wrapped in AWS Lambda functions. However, the testing is done

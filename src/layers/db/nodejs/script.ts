@@ -4,26 +4,7 @@ import {getAllUsers} from "./src/functions/users/read";
 const prisma = new PrismaClient()
 
 async function main() {
-    /*const insertUser = async () => {
-        const user = await prisma.user.create({
-            data: {
-                email: 'lisa@email.com',
-                name: 'Lisa B',
-            },
-        })
-        console.log(user)
-    }*/
-
-    /*const getAllUsers = async () => {
-        const users = await prisma.user.findMany({
-            include: {
-                post: true
-            }
-        })
-        console.dir(users, {depth: null})
-    }*/
-
-    const createUserWithPosts = async () => {
+    /*const createUserWithPosts = async () => {
         const user = await prisma.user.create({
             data: {
                 name: 'John A',
@@ -37,13 +18,13 @@ async function main() {
             }
         })
         console.log(user)
-    }
+    }*/
 
     // await insertUser()
-     await getAllUsers()
     // await createUserWithPosts()
     // await createUser("Amy B", "amy@email.com")
     // await getAllUsers();
+    await getAllUsers()
 }
 
 main()
