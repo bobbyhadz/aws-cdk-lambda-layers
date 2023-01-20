@@ -1,5 +1,6 @@
 {
-  "name": "cdk-starter",
+  "name": "cdk-prisma-postgres",
+  "description": "A CDK app demonstrating how to use PrismaIO as a DB layer to perform CRUD operations.",
   "version": "0.1.0",
   "bin": {
     "cdk-starter": "bin/cdk-starter.js"
