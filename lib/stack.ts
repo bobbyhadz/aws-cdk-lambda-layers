@@ -4,7 +4,6 @@ import {Network} from "./constructs/network";
 import {Functions} from "./constructs/functions";
 import {Database} from "./constructs/database";
 import {Apis} from "./constructs/apis";
-import {CfnOutput} from "aws-cdk-lib";
 
 export class Stack extends cdk.Stack {
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
@@ -22,8 +21,7 @@ export class Stack extends cdk.Stack {
             dbUser: "postgres"
         })
         const lambdas = new Functions(this, "PostgresPrismaLambdas", {db: dbInstance.db, layers: [dbLayer]})
-        const apis = new Apis(this, "PostgresPrismaApis")
 
-
+        const apis = new Apis(this, "PostgresPrismaApis", {lambdaIntegrations: lambdas.lambdaApiIntegrations})
     }
 }

@@ -4,6 +4,7 @@ import * as path from "path";
 import {Architecture, FunctionUrlAuthType, LayerVersion, Runtime} from "aws-cdk-lib/aws-lambda";
 import {DatabaseInstance} from "aws-cdk-lib/aws-rds";
 import {ALL_LAMBDAS} from "../lambdas";
+import {LambdaIntegrationType} from "../apis";
 
 interface FunctionsProps {
     db: DatabaseInstance
@@ -11,6 +12,8 @@ interface FunctionsProps {
 }
 
 export class Functions extends Construct {
+    public readonly lambdaApiIntegrations: LambdaIntegrationType[];
+
     constructor(scope: Construct, id: string, props: FunctionsProps) {
         super(scope, id);
         const dbSecret = props.db.secret;
@@ -25,7 +28,7 @@ export class Functions extends Construct {
         //console.log({DATABASE_URL})
 
         const lambdasDir = path.join(__dirname, '../', 'lambdas')
-        ALL_LAMBDAS.forEach(lambda => {
+        this.lambdaApiIntegrations = ALL_LAMBDAS.map(lambda => {
             const fn = new aws_lambda_nodejs.NodejsFunction(this, lambda.id, {
                 entry: path.join(lambdasDir, lambda.entryPath),
                 runtime: Runtime.NODEJS_18_X,
@@ -46,6 +49,13 @@ export class Functions extends Construct {
 
             const fnUrl = fn.addFunctionUrl({authType: FunctionUrlAuthType.NONE})
             new CfnOutput(this, `${lambda.id}Url`, {value: fnUrl.url})
+
+            const apiFn: LambdaIntegrationType = {
+                fn,
+                resource: lambda.resource,
+                httpMethod: lambda.httpMethod
+            }
+            return apiFn
         })
     }
 }
