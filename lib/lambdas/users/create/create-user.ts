@@ -10,7 +10,8 @@ export const handler = async function main(
     event: APIGatewayProxyEventV2,
 ): Promise<APIGatewayProxyResultV2> {
     console.log(event);
-    const {name, email} = event as unknown as UserType;
+    const {name, email} = JSON.parse(event.body as string) as UserType;
+    console.log({name, email})
     const user = await createUser(name, email)
     return {
         body: JSON.stringify(user),

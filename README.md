@@ -187,6 +187,27 @@ If this succeeds, you should see an output similar to the following
 {"body":"{\"id\":5,\"email\":\"remy@email.com\",\"name\":\"Remy D\"}","statusCode":200}
 ```
 
+## API
+> Note: You will get `API_ENDPOINT` as the output of `cdk deploy` command.
+
+### GET users
+```shell
+curl -H"Content-Type:application/json" -v <API_ENDPOINT>/users
+```
+
+If the call succeeds, you should get an output similar to the following
+```shell
+[{"id":1,"email":"amy@email.com","name":"Amy B","post":[]},{"id":2,"email":"johnny@email.com","name":"Johnny J","post":[]}]
+```
+
+### POST users
+```shell
+curl -H "Content-Type:application/json" -XPOST -d '{"name": "Charlie C", "email": "charlie@email.com"}' -v <API_ENDPOINT>>/users
+```
+If the call succeeds, you should get an output similar to the following
+```shell
+{"id":3,"email":"charlie@email.com","name":"Charlie C"}
+```
 
 ## Resources
 [Invoking Lambda Functions Locally](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html)

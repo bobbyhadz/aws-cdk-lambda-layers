@@ -1,5 +1,6 @@
 import {PrismaClient} from '@prisma/client'
 import {getAllUsers} from "./src/functions/users/read";
+import {createUser} from "./db";
 
 const prisma = new PrismaClient()
 
@@ -22,9 +23,9 @@ async function main() {
 
     // await insertUser()
     // await createUserWithPosts()
-    // await createUser("Amy B", "amy@email.com")
-    // await getAllUsers();
-    await getAllUsers()
+    // await createUser("Johnny J", "johnny@email.com")
+    await getAllUsers();
+    // await getAllUsers()
 }
 
 main()

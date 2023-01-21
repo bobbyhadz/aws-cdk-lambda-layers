@@ -1,5 +1,12 @@
 import {Construct} from "constructs";
-import {Cors, MockIntegration, PassthroughBehavior, Resource, RestApi} from "aws-cdk-lib/aws-apigateway";
+import {
+    Cors,
+    LambdaIntegration,
+    MockIntegration,
+    PassthroughBehavior,
+    Resource,
+    RestApi
+} from "aws-cdk-lib/aws-apigateway";
 import {CfnOutput} from "aws-cdk-lib";
 import {HttpResource, LambdaIntegrationType} from "../apis";
 
@@ -29,31 +36,7 @@ export class Apis extends Construct {
 
         props.lambdaIntegrations.forEach(lambdaIntegration => {
             const resource = this.resources.get(lambdaIntegration.resource) as Resource;
-            resource.addMethod(lambdaIntegration.httpMethod, new MockIntegration({
-                integrationResponses: [{
-                    statusCode: '200',
-                    responseParameters: {
-                        'method.response.header.Access-Control-Allow-Headers': "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                        'method.response.header.Access-Control-Allow-Origin': "'*'",
-                        'method.response.header.Access-Control-Allow-Credentials': "'false'",
-                        'method.response.header.Access-Control-Allow-Methods': "'OPTIONS,GET,PUT,POST,DELETE'",
-                    },
-                }],
-                passthroughBehavior: PassthroughBehavior.NEVER,
-                requestTemplates: {
-                    "application/json": "{\"statusCode\": 200}"
-                },
-            }), {
-                methodResponses: [{
-                    statusCode: '200',
-                    responseParameters: {
-                        'method.response.header.Access-Control-Allow-Headers': true,
-                        'method.response.header.Access-Control-Allow-Methods': true,
-                        'method.response.header.Access-Control-Allow-Credentials': true,
-                        'method.response.header.Access-Control-Allow-Origin': true,
-                    },
-                }]
-            })
+            resource.addMethod(lambdaIntegration.httpMethod, new LambdaIntegration(lambdaIntegration.fn))
         })
 
         new CfnOutput(this, "Api", {
