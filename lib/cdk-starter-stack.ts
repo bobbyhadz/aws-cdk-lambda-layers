@@ -40,7 +40,7 @@ export class CdkStarterStack extends cdk.Stack {
         minify: false,
         // 👇 don't bundle `yup` layer
         // layers are already available in the lambda env
-        externalModules: ['aws-sdk', 'yup'],
+        externalModules: ['aws-sdk', 'yup', '/opt/nodejs/calc'],
       },
       layers: [calcLayer, yupLayer],
     });
